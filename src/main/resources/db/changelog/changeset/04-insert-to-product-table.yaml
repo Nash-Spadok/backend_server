@@ -1,0 +1,101 @@
+databaseChangeLog:
+  - changeSet:
+      id: 04-insert-to-product-table
+      author: Vadym P
+      changes:
+        - insert:
+            tableName: products
+            columns:
+              - column: {name: id, value: 1}
+              - column: {name: title, value: "Test 1"}
+              - column: {name: price, value: 100}
+              - column: {name: size, value: "XL"}
+              - column: {name: image_url, value: "https://www.google.com"}
+              - column: {name: maintenance, value: "TEST TEXT"}
+              - column: {name: category_id, value: 1}
+              - column: {name: size_chart_url, value: "https://www.google.com"}
+              - column: {name: description, value: "Test description"}
+        - insert:
+            tableName: products
+            columns:
+              - column: { name: id, value: 2 }
+              - column: { name: title, value: "Test 2" }
+              - column: { name: price, value: 200 }
+              - column: { name: size, value: "S" }
+              - column: { name: image_url, value: "https://www.google.com" }
+              - column: { name: maintenance, value: "TEST TEXT2" }
+              - column: { name: category_id, value: 2 }
+              - column: { name: size_chart_url, value: "https://www.google.com" }
+              - column: { name: description, value: "Test description2" }
+        - insert:
+            tableName: products
+            columns:
+              - column: { name: id, value: 3 }
+              - column: { name: title, value: "Test 3" }
+              - column: { name: price, value: 300 }
+              - column: { name: size, value: "S" }
+              - column: { name: image_url, value: "https://www.google.com" }
+              - column: { name: maintenance, value: "TEST TEXT3" }
+              - column: { name: category_id, value: 3 }
+              - column: { name: size_chart_url, value: "https://www.google.com" }
+              - column: { name: description, value: "Test description3" }
+        - insert:
+            tableName: products
+            columns:
+              - column: { name: id, value: 4 }
+              - column: { name: title, value: "Test 4" }
+              - column: { name: price, value: 400 }
+              - column: { name: size, value: "M" }
+              - column: { name: image_url, value: "https://www.google.com" }
+              - column: { name: maintenance, value: "TEST TEXT4" }
+              - column: { name: category_id, value: 4 }
+              - column: { name: size_chart_url, value: "https://www.google.com" }
+              - column: { name: description, value: "Test description4" }
+        - insert:
+            tableName: products
+            columns:
+              - column: { name: id, value: 5 }
+              - column: { name: title, value: "Test 5" }
+              - column: { name: price, value: 100 }
+              - column: { name: size, value: "L" }
+              - column: { name: image_url, value: "https://www.google.com" }
+              - column: { name: maintenance, value: "TEST TEXT5" }
+              - column: { name: category_id, value: 5 }
+              - column: { name: size_chart_url, value: "https://www.google.com" }
+              - column: { name: description, value: "Test description5" }
+        - insert:
+            tableName: products
+            columns:
+              - column: { name: id, value: 6 }
+              - column: { name: title, value: "Test 6" }
+              - column: { name: price, value: 600 }
+              - column: { name: size, value: "L" }
+              - column: { name: image_url, value: "https://www.google.com" }
+              - column: { name: maintenance, value: "TEST TEXT6" }
+              - column: { name: category_id, value: 1 }
+              - column: { name: size_chart_url, value: "https://www.google.com" }
+              - column: { name: description, value: "Test description6" }
+        - insert:
+            tableName: products
+            columns:
+              - column: { name: id, value: 7 }
+              - column: { name: title, value: "Test 7" }
+              - column: { name: price, value: 700 }
+              - column: { name: size, value: "M" }
+              - column: { name: image_url, value: "https://www.google.com" }
+              - column: { name: maintenance, value: "TEST TEXT7" }
+              - column: { name: category_id, value: 2 }
+              - column: { name: size_chart_url, value: "https://www.google.com" }
+              - column: { name: description, value: "Test description7" }
+        - insert:
+            tableName: products
+            columns:
+              - column: { name: id, value: 8 }
+              - column: { name: title, value: "Test 8" }
+              - column: { name: price, value: 800 }
+              - column: { name: size, value: "S" }
+              - column: { name: image_url, value: "https://www.google.com" }
+              - column: { name: maintenance, value: "TEST TEXT8" }
+              - column: { name: category_id, value: 3 }
+              - column: { name: size_chart_url, value: "https://www.google.com" }
+              - column: { name: description, value: "Test description8" }
