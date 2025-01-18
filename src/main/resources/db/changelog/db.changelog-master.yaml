@@ -7,5 +7,3 @@ databaseChangeLog:
       file: db/changelog/changeset/03-insert-to-category-table.yaml
   - include:
       file: db/changelog/changeset/04-insert-to-product-table.yaml
-  - include:
-      file: db/changelog/changeset/05-add-column-category-table.yaml

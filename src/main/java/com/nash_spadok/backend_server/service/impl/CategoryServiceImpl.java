@@ -5,7 +5,7 @@ import com.nash_spadok.backend_server.dto.category.CategoryResponseDto;
 import com.nash_spadok.backend_server.exception.EntityNotFoundException;
 import com.nash_spadok.backend_server.mapper.CategoryMapper;
 import com.nash_spadok.backend_server.model.Category;
-import com.nash_spadok.backend_server.repository.CategoryRepository;
+import com.nash_spadok.backend_server.repository.category.CategoryRepository;
 import com.nash_spadok.backend_server.service.CategoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

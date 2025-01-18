@@ -1,10 +1,14 @@
 package com.nash_spadok.backend_server.mapper;
 
 import com.nash_spadok.backend_server.config.MapperConfig;
-import com.nash_spadok.backend_server.dto.ProductRequestDto;
-import com.nash_spadok.backend_server.dto.ProductRespondDto;
+import com.nash_spadok.backend_server.dto.product.ProductRequestDto;
+import com.nash_spadok.backend_server.dto.product.ProductRespondDto;
 import com.nash_spadok.backend_server.model.Product;
-import org.mapstruct.*;
+import org.mapstruct.AfterMapping;
+import org.mapstruct.BeanMapping;
+import org.mapstruct.Mapper;
+import org.mapstruct.MappingTarget;
+import org.mapstruct.NullValuePropertyMappingStrategy;
 
 /*
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)

@@ -1,4 +1,4 @@
-package com.nash_spadok.backend_server.repository;
+package com.nash_spadok.backend_server.repository.category;
 
 import com.nash_spadok.backend_server.model.Category;
 import org.springframework.data.jpa.repository.JpaRepository;

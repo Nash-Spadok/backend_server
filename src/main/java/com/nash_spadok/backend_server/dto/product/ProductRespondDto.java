@@ -1,11 +1,12 @@
-package com.nash_spadok.backend_server.dto;
+package com.nash_spadok.backend_server.dto.product;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class ProductRequestDto {
+public class ProductRespondDto {
+    private Long id;
     private String title;
     private Long price;
     private String size;
