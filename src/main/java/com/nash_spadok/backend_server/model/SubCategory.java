@@ -8,10 +8,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Getter
 @Setter
-@Table(name = "categories")
-public class Category {
+@Getter
+@Table(name = "sub_categories")
+public class SubCategory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -19,12 +19,10 @@ public class Category {
     @Column(nullable = false, unique = true)
     private String name;
 
-    @Column(nullable = false)
-    private String imageUrl;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "category_id", nullable = false)
+    private Category category;
 
-    @Column(nullable = false)
-    private String description;
-
-    @OneToMany(mappedBy = "category", fetch = FetchType.LAZY)
-    private List<SubCategory> subCategories = new ArrayList<>();
+    @OneToMany(mappedBy = "subCategory", fetch = FetchType.LAZY)
+    private List<Product> products = new ArrayList<>();
 }

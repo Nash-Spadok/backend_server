@@ -13,14 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -59,27 +52,43 @@ public class ProductController {
         return ResponseEntity.ok(productService.getProduct(id));
     }
 
-    @GetMapping
-    @Operation(summary = "Get all products", description = "Get all products")
-    public ResponseEntity<List<ProductRespondDto>> getAllProducts(
-            @ParameterObject @PageableDefault Pageable pageable) {
-        return ResponseEntity.ok(productService.getAllProducts(pageable));
-    }
 
-    @GetMapping("/category/{id}")
-    @Operation(summary = "Get products by category", description = "Get products by category")
-    public ResponseEntity<List<ProductRespondDto>> getProductsByCategory(@PathVariable Long id) {
-        return ResponseEntity.ok(productService.getProductsByCategoryId(id));
-    }
+
+
+
+
+
+
+
+    // no need
+//    @GetMapping
+//    @Operation(summary = "Get all products", description = "Get all products")
+//    public ResponseEntity<List<ProductRespondDto>> getAllProducts(
+//            @ParameterObject @PageableDefault Pageable pageable) {
+//        return ResponseEntity.ok(productService.getAllProducts(pageable));
+//    }
+
+//    @GetMapping("/subcategory/{id}")
+//    @Operation(summary = "Get products by subcategory", description = "Get products by subcategory")
+//    public ResponseEntity<List<ProductRespondDto>> getProductsBySubCategory(@PathVariable Long id) {
+//        return ResponseEntity.ok(productService.getProductsBySubCategoryId(id));
+//    }
+//
+//    @GetMapping("/category/{id}")
+//    @Operation(summary = "Get products by category", description = "Get products by category")
+//    public ResponseEntity<List<ProductRespondDto>> getProductsByCategory(@PathVariable Long id) {
+//        return ResponseEntity.ok(productService.getProductsByCategoryId(id));
+//    }
 
     @GetMapping("/search")
     @Operation(
             summary = "Search products",
-            description = "Search products by various criteria"
+            description = "Search products by various criteria with sorting"
     )
     public ResponseEntity<List<ProductRespondDto>> searchProducts(
             @Valid @ParameterObject ProductSearchDto search,
-            @ParameterObject @PageableDefault Pageable pageable) {
-        return ResponseEntity.ok(productService.searchProducts(search, pageable));
+            @ParameterObject @PageableDefault Pageable pageable,
+            @RequestParam String sortOrder) {
+        return ResponseEntity.ok(productService.searchProducts(search, pageable, sortOrder));
     }
 }

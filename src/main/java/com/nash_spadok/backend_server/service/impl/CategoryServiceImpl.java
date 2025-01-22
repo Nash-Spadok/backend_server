@@ -5,11 +5,14 @@ import com.nash_spadok.backend_server.dto.category.CategoryResponseDto;
 import com.nash_spadok.backend_server.exception.EntityNotFoundException;
 import com.nash_spadok.backend_server.mapper.CategoryMapper;
 import com.nash_spadok.backend_server.model.Category;
-import com.nash_spadok.backend_server.repository.category.CategoryRepository;
+import com.nash_spadok.backend_server.repository.CategoryRepository;
 import com.nash_spadok.backend_server.service.CategoryService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -43,6 +46,15 @@ public class CategoryServiceImpl implements CategoryService {
     public CategoryResponseDto getCategory(Long id) {
         Category category = findCategoryById(id);
         return categoryMapper.toDto(category);
+    }
+
+    @Override
+    public List<CategoryResponseDto> getAllCategories(Pageable pageable) {
+        return categoryRepository
+                .findAll(pageable)
+                .stream()
+                .map(categoryMapper::toDto)
+                .toList();
     }
 
     private Category findCategoryById(Long id) {

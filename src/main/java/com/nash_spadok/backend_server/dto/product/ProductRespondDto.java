@@ -13,6 +13,6 @@ public class ProductRespondDto {
     private String description;
     private String imageUrl;
     private String maintenance;
-    private Long categoryId;
+    private Long subCategoryId;
     private String sizeChartUrl;
 }

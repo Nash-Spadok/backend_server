@@ -18,7 +18,7 @@ public interface ProductService {
 
     List<ProductRespondDto> getAllProducts(Pageable pageable);
 
-    List<ProductRespondDto> getProductsByCategoryId(Long id);
+    List<ProductRespondDto> getProductsBySubCategoryId(Long id);
 
-    List<ProductRespondDto> searchProducts(ProductSearchDto search, Pageable pageable);
+    List<ProductRespondDto> searchProducts(ProductSearchDto search, Pageable pageable, String sortOrder);
 }

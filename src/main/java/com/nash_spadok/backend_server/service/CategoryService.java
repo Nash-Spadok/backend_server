@@ -2,6 +2,9 @@ package com.nash_spadok.backend_server.service;
 
 import com.nash_spadok.backend_server.dto.category.CategoryRequestDto;
 import com.nash_spadok.backend_server.dto.category.CategoryResponseDto;
+import org.springframework.data.domain.Pageable;
+
+import java.util.List;
 
 public interface CategoryService {
     CategoryResponseDto createCategory(CategoryRequestDto categoryRequestDto);
@@ -11,4 +14,6 @@ public interface CategoryService {
     void deleteCategory(Long id);
 
     CategoryResponseDto getCategory(Long id);
+
+    List<CategoryResponseDto> getAllCategories(Pageable pageable);
 }

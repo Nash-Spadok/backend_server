@@ -24,9 +24,9 @@ public interface ProductMapper {
     void updateProductFromDto(ProductRequestDto productRequestDto, @MappingTarget Product product);
 
     @AfterMapping
-    default void setProductCategory(Product product, @MappingTarget ProductRespondDto productRespondDto) {
-        if (product != null && product.getCategory() != null) {
-            productRespondDto.setCategoryId(product.getCategory().getId());
+    default void setProductSubCategoryIds(Product product, @MappingTarget ProductRespondDto productRespondDto) {
+        if (product != null && product.getSubCategory() != null) {
+            productRespondDto.setSubCategoryId(product.getSubCategory().getId());
         }
     }
 }

@@ -29,7 +29,7 @@ public class ProductRequestDto {
     private String maintenance;
 
     @NonNull
-    private Long categoryId;
+    private Long subCategoryId;
 
     @NotBlank(message = "Size chart URL is mandatory")
     private String sizeChartUrl;

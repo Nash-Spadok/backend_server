@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class ProductSpecificationBuilder implements SpecificationBuilder<Product> {
     private static final String PRICE_KEYWORD = "price";
-    private static final String CATEGORY_KEYWORD = "category";
+    private static final String TITLE_KEYWORD = "titles";
     private final SpecificationProviderManager<Product> specificationProviderManager;
 
     @Override
@@ -23,10 +23,10 @@ public class ProductSpecificationBuilder implements SpecificationBuilder<Product
                     .getSpecificationProvider(PRICE_KEYWORD)
                     .getSpecification(searchParameters.prices()));
         }
-        if (searchParameters.categories() != null && searchParameters.categories().length > 0) {
+        if (searchParameters.titles() != null && searchParameters.titles().length > 0) {
             spec = spec.and(specificationProviderManager
-                    .getSpecificationProvider(CATEGORY_KEYWORD)
-                    .getSpecification(searchParameters.categories()));
+                    .getSpecificationProvider(TITLE_KEYWORD)
+                    .getSpecification(searchParameters.titles()));
         }
         return spec;
     }

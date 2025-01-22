@@ -5,9 +5,9 @@ import com.nash_spadok.backend_server.dto.product.ProductRespondDto;
 import com.nash_spadok.backend_server.dto.product.ProductSearchDto;
 import com.nash_spadok.backend_server.exception.EntityNotFoundException;
 import com.nash_spadok.backend_server.mapper.ProductMapper;
-import com.nash_spadok.backend_server.model.Category;
 import com.nash_spadok.backend_server.model.Product;
-import com.nash_spadok.backend_server.repository.category.CategoryRepository;
+import com.nash_spadok.backend_server.model.SubCategory;
+import com.nash_spadok.backend_server.repository.SubCategoryRepository;
 import com.nash_spadok.backend_server.repository.product.ProductRepository;
 import com.nash_spadok.backend_server.repository.product.ProductSpecificationBuilder;
 import com.nash_spadok.backend_server.service.ProductService;
@@ -17,6 +17,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -24,14 +25,14 @@ import java.util.List;
 public class ProductServiceImpl implements ProductService {
     private final ProductRepository productRepository;
     private final ProductMapper productMapper;
-    private final CategoryRepository categoryRepository;
     private final ProductSpecificationBuilder specificationBuilder;
+    private final SubCategoryRepository subCategoryRepository;
 
     @Override
     @Transactional
     public ProductRespondDto createProduct(ProductRequestDto productRequestDto) {
         Product product = productMapper.toProduct(productRequestDto);
-        product.setCategory(findCategoryById(productRequestDto.getCategoryId()));
+        product.setSubCategory(findSubCategoryById(productRequestDto.getSubCategoryId()));
         return productMapper.toDto(productRepository.save(product));
     }
 
@@ -66,16 +67,23 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<ProductRespondDto> getProductsByCategoryId(Long id) {
-        return productRepository.findByCategoryId(id)
+    public List<ProductRespondDto> getProductsBySubCategoryId(Long id) {
+        return productRepository.findBySubCategoryIdOrderByTitleAsc(id)
                 .stream()
                 .map(productMapper::toDto)
                 .toList();
     }
 
     @Override
-    public List<ProductRespondDto> searchProducts(ProductSearchDto search, Pageable pageable) {
+    public List<ProductRespondDto> searchProducts(ProductSearchDto search, Pageable pageable, String sortOrder) {
         Specification<Product> specification = specificationBuilder.build(search);
+        if (sortOrder.equals("desc")) {
+            return productRepository.findAll(specification, pageable)
+                    .stream()
+                    .sorted(Comparator.comparing(Product::getTitle).reversed())
+                    .map(productMapper::toDto)
+                    .toList();
+        }
         return productRepository.findAll(specification, pageable)
                 .stream()
                 .map(productMapper::toDto)
@@ -88,9 +96,9 @@ public class ProductServiceImpl implements ProductService {
         );
     }
 
-    private Category findCategoryById(Long categoryId) {
-        return categoryRepository.findById(categoryId).orElseThrow(
-                () -> new EntityNotFoundException(String.format("Category with id %d not exist", categoryId))
+    private SubCategory findSubCategoryById(Long id) {
+        return subCategoryRepository.findById(id).orElseThrow(
+                () -> new EntityNotFoundException(String.format("SubCategory with id %d not exist", id))
         );
     }
 }
