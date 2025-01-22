@@ -9,27 +9,32 @@ databaseChangeLog:
               - column: {name: id, value: 1}
               - column: {name: name, value: "Жінкам"}
               - column: {name: description, value: "Test description"}
+              - column: {name: image_url, value: "url1"}
         - insert:
             tableName: categories
             columns:
               - column: { name: id, value: 2 }
               - column: { name: name, value: "Чоловікам" }
               - column: { name: description, value: "Test description2" }
+              - column: { name: image_url, value: "url2" }
         - insert:
             tableName: categories
             columns:
               - column: { name: id, value: 3 }
               - column: { name: name, value: "Дівчатам" }
               - column: { name: description, value: "Test description3" }
+              - column: { name: image_url, value: "url3" }
         - insert:
             tableName: categories
             columns:
               - column: { name: id, value: 4 }
               - column: { name: name, value: "Хлочикам" }
               - column: { name: description, value: "Test description4" }
+              - column: { name: image_url, value: "url4" }
         - insert:
             tableName: categories
             columns:
               - column: { name: id, value: 5 }
               - column: { name: name, value: "Книги" }
               - column: { name: description, value: "Test description5" }
+              - column: { name: image_url, value: "url5" }

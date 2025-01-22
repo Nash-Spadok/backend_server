@@ -40,7 +40,7 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - column:
-                  name: category_id
+                  name: sub_category_id
                   type: BIGINT
                   constraints:
                     nullable: false
