@@ -1,5 +1,6 @@
-package com.nash_spadok.backend_server.model;
+package com.nash_spadok.backend_server.model.category;
 
+import com.nash_spadok.backend_server.model.file.CategoryFile;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -19,8 +20,11 @@ public class Category {
     @Column(nullable = false, unique = true)
     private String name;
 
-    @Column(nullable = false)
-    private String imageUrl;
+    @OneToOne(
+            mappedBy = "category",
+            fetch = FetchType.LAZY,
+            cascade = CascadeType.PERSIST)
+    private CategoryFile categoryFile;
 
     @Column(nullable = false)
     private String description;

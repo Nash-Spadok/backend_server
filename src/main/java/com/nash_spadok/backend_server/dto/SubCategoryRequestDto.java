@@ -13,4 +13,7 @@ public class SubCategoryRequestDto {
 
     @NonNull
     private Long categoryId;
+
+    @NotBlank(message = "Image URL is required")
+    private String imageUrl;
 }

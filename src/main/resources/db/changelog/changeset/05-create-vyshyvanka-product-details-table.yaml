@@ -1,0 +1,28 @@
+databaseChangeLog:
+  - changeSet:
+      id: 05-create-vyshyvanka-product-details-table
+      author: Vadym P
+      changes:
+        - createTable:
+            tableName: vyshyvanka_product_details
+            columns:
+              - column:
+                  name: product_id
+                  type: BIGINT
+                  constraints:
+                    primaryKey: true
+                    foreignKeyName: fk_vyshyvanka_product_details_product
+                    foreignKeyTableName: product
+                    nullable: false
+              - column:
+                  name: size
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+
+        - addForeignKeyConstraint:
+            baseColumnNames: product_id
+            baseTableName: vyshyvanka_product_details
+            constraintName: fk_vyshyvanka_product_details_product
+            referencedColumnNames: id
+            referencedTableName: product

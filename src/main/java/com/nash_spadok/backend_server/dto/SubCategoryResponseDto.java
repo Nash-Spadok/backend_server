@@ -9,4 +9,5 @@ public class SubCategoryResponseDto {
     private Long id;
     private String name;
     private Long categoryId;
+    private String imageUrl;
 }

@@ -50,6 +50,16 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
         return createBodyMessage(ex, HttpStatus.NOT_FOUND);
     }
 
+    @ExceptionHandler(FileIsEmptyException.class)
+    public ResponseEntity<Object> handleEntityNotFoundException(FileIsEmptyException ex) {
+        return createBodyMessage(ex, HttpStatus.NO_CONTENT);
+    }
+
+    @ExceptionHandler(ProductNotAvailableException.class)
+    public ResponseEntity<Object> handleEntityNotFoundException(ProductNotAvailableException ex) {
+        return createBodyMessage(ex, HttpStatus.IM_USED);
+    }
+
     private ResponseEntity<Object> createBodyMessage(Exception ex, HttpStatus status) {
         Map<String, Object> body = new LinkedHashMap<>();
         body.put("timestamp", LocalDateTime.now());

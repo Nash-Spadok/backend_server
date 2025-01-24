@@ -1,6 +1,6 @@
 databaseChangeLog:
   - changeSet:
-      id: 03-create-subcategory-table
+      id: 02-create-subcategory-table
       author: Vadym P
       changes:
         - createTable:
@@ -19,11 +19,6 @@ databaseChangeLog:
                   constraints:
                     nullable: false
                     unique: true
-              - column:
-                  name: image_url
-                  type: VARCHAR(255)
-                  constraints:
-                    nullable: false
               - column:
                   name: category_id
                   type: BIGINT

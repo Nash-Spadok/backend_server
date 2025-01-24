@@ -6,9 +6,11 @@ import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
-public class ProductRequestDto {
+public class BookProductRequestDto {
     @NotBlank(message = "Title is mandatory")
     private String title;
 
@@ -16,21 +18,17 @@ public class ProductRequestDto {
     @NonNull
     private Long price;
 
-    @NotBlank(message = "Size is mandatory")
-    private String size;
+    private Long subCategoryId;
 
     @NotBlank(message = "Color is mandatory")
     private String description;
 
     @NotBlank(message = "Image URL is mandatory")
-    private String imageUrl;
+    private List<Long> images;
 
-    @NotBlank(message = "Maintenance is mandatory")
-    private String maintenance;
+    private String genre;
 
-    @NonNull
-    private Long subCategoryId;
+    private String size;
 
-    @NotBlank(message = "Size chart URL is mandatory")
-    private String sizeChartUrl;
+    private boolean isABook;
 }

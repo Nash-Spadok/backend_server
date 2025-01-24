@@ -1,24 +1,26 @@
 package com.nash_spadok.backend_server.service;
 
-import com.nash_spadok.backend_server.dto.product.ProductRequestDto;
-import com.nash_spadok.backend_server.dto.product.ProductRespondDto;
-import com.nash_spadok.backend_server.dto.product.ProductSearchDto;
-import org.springframework.data.domain.Pageable;
+import com.nash_spadok.backend_server.dto.product.BookProductRequestDto;
+import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
 public interface ProductService {
-    ProductRespondDto createProduct(ProductRequestDto productRequestDto);
+    ResponseEntity<?> createProduct(BookProductRequestDto productRequestDto);
+//
+//    BookProductRespondDto updateProduct(BookProductRequestDto productRequestDto, Long id);
+//
+//    void deleteProduct(Long id);
 
-    ProductRespondDto updateProduct(ProductRequestDto productRequestDto, Long id);
+    ResponseEntity<?> getProduct(Long id);
 
-    void deleteProduct(Long id);
+//    List<BookProductRespondDto> getAllBookProducts(Pageable pageable);
+//
+//    List<VyshyvankaProductRespondDto> getAllVyshyvankaProducts(Pageable pageable);
 
-    ProductRespondDto getProduct(Long id);
+    List<?> getProductsBySubCategoryId(Long id);
 
-    List<ProductRespondDto> getAllProducts(Pageable pageable);
+    List<?> getProductsByCategoryId(Long id);
 
-    List<ProductRespondDto> getProductsBySubCategoryId(Long id);
-
-    List<ProductRespondDto> searchProducts(ProductSearchDto search, Pageable pageable, String sortOrder);
+//    List<BookProductRespondDto> searchProducts(ProductSearchDto search, Pageable pageable, String sortOrder);
 }

@@ -3,7 +3,7 @@ package com.nash_spadok.backend_server.mapper;
 import com.nash_spadok.backend_server.config.MapperConfig;
 import com.nash_spadok.backend_server.dto.SubCategoryRequestDto;
 import com.nash_spadok.backend_server.dto.SubCategoryResponseDto;
-import com.nash_spadok.backend_server.model.SubCategory;
+import com.nash_spadok.backend_server.model.category.SubCategory;
 import org.mapstruct.AfterMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
