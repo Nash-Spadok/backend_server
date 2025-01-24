@@ -1,14 +1,11 @@
 package com.nash_spadok.backend_server.mapper;
 
 import com.nash_spadok.backend_server.config.MapperConfig;
-import com.nash_spadok.backend_server.dto.product.ProductRequestDto;
-import com.nash_spadok.backend_server.dto.product.ProductRespondDto;
-import com.nash_spadok.backend_server.model.Product;
-import org.mapstruct.AfterMapping;
-import org.mapstruct.BeanMapping;
-import org.mapstruct.Mapper;
-import org.mapstruct.MappingTarget;
-import org.mapstruct.NullValuePropertyMappingStrategy;
+import com.nash_spadok.backend_server.dto.product.BookProductRequestDto;
+import com.nash_spadok.backend_server.dto.product.BookProductRespondDto;
+import com.nash_spadok.backend_server.dto.product.VyshyvankaProductRespondDto;
+import com.nash_spadok.backend_server.model.product.Product;
+import org.mapstruct.*;
 
 /*
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
@@ -16,17 +13,22 @@ import org.mapstruct.NullValuePropertyMappingStrategy;
  */
 @Mapper(config = MapperConfig.class)
 public interface ProductMapper {
-    Product toProduct(ProductRequestDto productRequestDto);
+    @Mapping(target = "images", ignore = true)
+    Product toEntity(BookProductRequestDto productRequestDto);
 
-    ProductRespondDto toDto(Product product);
+    @Mapping(target = "images", ignore = true)
+    BookProductRespondDto toBookDto(Product product);
 
-    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    void updateProductFromDto(ProductRequestDto productRequestDto, @MappingTarget Product product);
+    @Mapping(target = "images", ignore = true)
+    VyshyvankaProductRespondDto toVyshyvankaDto(Product product);
 
-    @AfterMapping
-    default void setProductSubCategoryIds(Product product, @MappingTarget ProductRespondDto productRespondDto) {
-        if (product != null && product.getSubCategory() != null) {
-            productRespondDto.setSubCategoryId(product.getSubCategory().getId());
-        }
-    }
+//    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+//    void updateProductFromDto(BookProductRequestDto productRequestDto, @MappingTarget Product product);
+
+//    @AfterMapping
+//    default void setProductSubCategoryIds(Product product, @MappingTarget BookProductRespondDto productRespondDto) {
+//        if (product != null && product.getSubCategory() != null) {
+//            productRespondDto.setSubCategoryId(product.getSubCategory().getId());
+//        }
+//    }
 }

@@ -30,11 +30,11 @@ public class SubCategoryController {
         return subCategoryService.createSubCategory(subCategoryRequestDto);
     }
 
-    @GetMapping("/category/{categoryId}")
-    @Operation(summary = "Get subcategory by category id")
-    public List<SubCategoryResponseDto> getSubCategoryByCategoryId(@PathVariable Long categoryId) {
-        return subCategoryService.getSubCategoryByCategoryId(categoryId);
-    }
+//    @GetMapping("/category/{categoryId}")
+//    @Operation(summary = "Get subcategory by category id")
+//    public List<SubCategoryResponseDto> getSubCategoryByCategoryId(@PathVariable Long categoryId) {
+//        return subCategoryService.getSubCategoryByCategoryId(categoryId);
+//    }
 
     @GetMapping
     @Operation(summary = "Get all subcategories")

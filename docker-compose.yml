@@ -13,9 +13,10 @@ services:
         "spring.datasource.username" : "$POSTGRES_USER",
         "spring.datasource.password" : "$POSTGRES_PASSWORD",
         "spring.jpa.properties.hibernate.dialect" : "org.hibernate.dialect.PostgreSQLDialect",
-        "spring.jpa.hibernate.ddl-auto" : "update",
+        "spring.jpa.hibernate.ddl-auto" : "validate",
         "spring.jpa.generate-ddl" : "true",
         "spring.jpa.show-sql" : "true",
-        "spring.jpa.open-in-view" : "false"
+        "spring.jpa.open-in-view" : "false",
+        "spring.liquibase.drop-first" : "false"
       }'
       JAVA_TOOL_OPTIONS: "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:$DEBUG_PORT"

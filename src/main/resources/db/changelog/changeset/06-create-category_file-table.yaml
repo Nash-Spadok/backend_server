@@ -1,10 +1,10 @@
 databaseChangeLog:
   - changeSet:
-      id: 03-create-subcategory-table
+      id: 06-create-category_file-table
       author: Vadym P
       changes:
         - createTable:
-            tableName: sub_categories
+            tableName: category_files
             columns:
               - column:
                   name: id
@@ -14,11 +14,16 @@ databaseChangeLog:
                     primaryKey: true
                     nullable: false
               - column:
-                  name: name
+                  name: url
                   type: VARCHAR(255)
                   constraints:
                     nullable: false
                     unique: true
+              - column:
+                  name: created_at
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: false
               - column:
                   name: category_id
                   type: BIGINT
