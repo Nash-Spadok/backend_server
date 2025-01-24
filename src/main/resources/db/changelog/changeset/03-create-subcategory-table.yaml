@@ -20,6 +20,11 @@ databaseChangeLog:
                     nullable: false
                     unique: true
               - column:
+                  name: image_url
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
                   name: category_id
                   type: BIGINT
                   constraints:
