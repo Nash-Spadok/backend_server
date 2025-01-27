@@ -14,6 +14,7 @@ import java.util.List;
 
 @Service
 public class CategoryFileServiceImpl implements CategoryFileService {
+    private static final String FOLDER_NAME = "Category";
     @Qualifier(value = "s3Service")
     private final FileStorageService fileStorageService;
 
@@ -32,7 +33,7 @@ public class CategoryFileServiceImpl implements CategoryFileService {
 
     private String getImageUrl(MultipartFile image) {
         return fileStorageService
-                .uploadFileToS3("Category", List.of(image))
+                .uploadFileToS3(FOLDER_NAME, List.of(image))
                 .stream()
                 .findFirst()
                 .orElseThrow(() -> new FileUploadException("File uploaded " + image + " incorrectly"));
