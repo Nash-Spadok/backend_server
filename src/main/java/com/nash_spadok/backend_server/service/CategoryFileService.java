@@ -6,4 +6,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 public interface CategoryFileService {
     CategoryFile create(MultipartFile image, Category category);
+
+    void delete(String imageUrl);
 }

@@ -23,7 +23,7 @@ public class Category {
     @OneToOne(
             mappedBy = "category",
             fetch = FetchType.LAZY,
-            cascade = CascadeType.PERSIST)
+            cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     private CategoryFile categoryFile;
 
     @Column(nullable = false)

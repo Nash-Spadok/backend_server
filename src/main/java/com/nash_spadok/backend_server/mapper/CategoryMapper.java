@@ -3,6 +3,7 @@ package com.nash_spadok.backend_server.mapper;
 import com.nash_spadok.backend_server.config.MapperConfig;
 import com.nash_spadok.backend_server.dto.category.CategoryRequestDto;
 import com.nash_spadok.backend_server.dto.category.CategoryResponseDto;
+import com.nash_spadok.backend_server.dto.category.CategoryUpdateRequestDto;
 import com.nash_spadok.backend_server.model.category.Category;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -14,5 +15,5 @@ public interface CategoryMapper {
 
     CategoryResponseDto toDto(Category category);
 
-    void updateCategoryFromDto(CategoryRequestDto categoryRequestDto, @MappingTarget Category category);
+    void updateCategoryFromDto(CategoryUpdateRequestDto categoryRequestDto, @MappingTarget Category category);
 }

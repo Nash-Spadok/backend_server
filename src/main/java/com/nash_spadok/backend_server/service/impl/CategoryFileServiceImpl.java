@@ -31,6 +31,12 @@ public class CategoryFileServiceImpl implements CategoryFileService {
         return categoryFile;
     }
 
+    @Override
+    @Transactional
+    public void delete(String imageUrl) {
+        fileStorageService.deleteFileFromS3(imageUrl);
+    }
+
     private String getImageUrl(MultipartFile image) {
         return fileStorageService
                 .uploadFileToS3(FOLDER_NAME, List.of(image))

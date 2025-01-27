@@ -4,10 +4,12 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nash_spadok.backend_server.dto.category.CategoryRequestDto;
 import com.nash_spadok.backend_server.dto.category.CategoryResponseDto;
+import com.nash_spadok.backend_server.dto.category.CategoryUpdateRequestDto;
 import com.nash_spadok.backend_server.service.CategoryService;
 import com.nash_spadok.backend_server.validation.ValidImageFile;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springdoc.api.annotations.ParameterObject;
 import org.springframework.data.domain.Pageable;
@@ -33,7 +35,7 @@ public class CategoryController {
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @Operation(summary = "", description = "")
-    public CategoryResponseDto createCategory(
+    public ResponseEntity<CategoryResponseDto> createCategory(
             @RequestPart("data") String data,
             @RequestPart("file") @ValidImageFile MultipartFile file
     ) {
@@ -47,22 +49,36 @@ public class CategoryController {
         } catch (JsonProcessingException e) {
             throw new IllegalArgumentException("Invalid data format: " + e.getMessage());
         }
-        return categoryService.createCategory(requestDto);
+        return ResponseEntity.ok(categoryService.createCategory(requestDto));
     }
 
-//    @PatchMapping("/{id}")
-//    @Operation(summary = "Update category")
-//    public ResponseEntity<CategoryResponseDto> updateCategory(@RequestBody @Valid CategoryRequestDto categoryRequestDto,
-//                                                              @PathVariable Long id) {
-//        return ResponseEntity.ok(categoryService.updateCategory(categoryRequestDto, id));
-//    }
-//
-//    @DeleteMapping("/{id}")
-//    @Operation(summary = "Delete category")
-//    public ResponseEntity<Void> deleteCategory(@PathVariable Long id) {
-//        categoryService.deleteCategory(id);
-//        return ResponseEntity.ok().build();
-//    }
+    @PreAuthorize("hasRole('ADMIN')")
+    @PatchMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE, value = "/{id}")
+    @Operation(summary = "Update category")
+    public ResponseEntity<CategoryResponseDto> updateCategory(
+            @RequestPart("data") String data,
+            @RequestPart("file") @ValidImageFile MultipartFile file,
+            @PathVariable Long id
+    ) {
+            if (data == null || data.isEmpty()) {
+                throw new IllegalArgumentException("Data string cannot be null or empty");
+            }
+        CategoryUpdateRequestDto requestDto;
+            try {
+                requestDto = objectMapper.readValue(data, CategoryUpdateRequestDto.class);
+                requestDto.setImage(file);
+            } catch (JsonProcessingException e) {
+                throw new IllegalArgumentException("Invalid data format: " + e.getMessage());
+            }
+        return ResponseEntity.ok(categoryService.updateCategory(requestDto, id));
+    }
+
+    @DeleteMapping("/{id}")
+    @Operation(summary = "Delete category")
+    public ResponseEntity<Void> deleteCategory(@PathVariable Long id) {
+        categoryService.deleteCategory(id);
+        return ResponseEntity.ok().build();
+    }
 
     @GetMapping("/{id}")
     @Operation(summary = "Get category")
