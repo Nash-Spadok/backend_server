@@ -1,21 +1,40 @@
 package com.nash_spadok.backend_server.service.impl;
 
+import com.nash_spadok.backend_server.exception.FileUploadException;
 import com.nash_spadok.backend_server.model.category.Category;
 import com.nash_spadok.backend_server.model.file.CategoryFile;
-import com.nash_spadok.backend_server.repository.CategoryFileRepository;
 import com.nash_spadok.backend_server.service.CategoryFileService;
-import lombok.RequiredArgsConstructor;
+import com.nash_spadok.backend_server.service.files.FileStorageService;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 @Service
-@RequiredArgsConstructor
 public class CategoryFileServiceImpl implements CategoryFileService {
+    @Qualifier(value = "s3Service")
+    private final FileStorageService fileStorageService;
+
+    public CategoryFileServiceImpl(FileStorageService fileStorageService) {
+        this.fileStorageService = fileStorageService;
+    }
 
     @Override
-    public CategoryFile create(String imageUrl, Category category) {
+    @Transactional
+    public CategoryFile create(MultipartFile image, Category category) {
         CategoryFile categoryFile = new CategoryFile();
         categoryFile.setCategory(category);
-        categoryFile.setUrl(imageUrl);
+        categoryFile.setUrl(getImageUrl(image));
         return categoryFile;
+    }
+
+    private String getImageUrl(MultipartFile image) {
+        return fileStorageService
+                .uploadFileToS3("Category", List.of(image))
+                .stream()
+                .findFirst()
+                .orElseThrow(() -> new FileUploadException("File uploaded " + image + " incorrectly"));
     }
 }

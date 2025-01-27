@@ -8,13 +8,13 @@ import com.nash_spadok.backend_server.service.CategoryService;
 import com.nash_spadok.backend_server.validation.ValidImageFile;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springdoc.api.annotations.ParameterObject;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -30,10 +30,24 @@ public class CategoryController {
     private final CategoryService categoryService;
     private final ObjectMapper objectMapper;
 
-    @PostMapping
-    @Operation(summary = "Create category")
-    public ResponseEntity<CategoryResponseDto> createCategory(@RequestBody @Valid CategoryRequestDto categoryRequestDto) {
-        return ResponseEntity.ok(categoryService.createCategory(categoryRequestDto));
+    @PreAuthorize("hasRole('ADMIN')")
+    @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @Operation(summary = "", description = "")
+    public CategoryResponseDto createCategory(
+            @RequestPart("data") String data,
+            @RequestPart("file") @ValidImageFile MultipartFile file
+    ) {
+        if (data == null || data.isEmpty()) {
+            throw new IllegalArgumentException("Data string cannot be null or empty");
+        }
+        CategoryRequestDto requestDto;
+        try {
+            requestDto = objectMapper.readValue(data, CategoryRequestDto.class);
+            requestDto.setImage(file);
+        } catch (JsonProcessingException e) {
+            throw new IllegalArgumentException("Invalid data format: " + e.getMessage());
+        }
+        return categoryService.createCategory(requestDto);
     }
 
 //    @PatchMapping("/{id}")

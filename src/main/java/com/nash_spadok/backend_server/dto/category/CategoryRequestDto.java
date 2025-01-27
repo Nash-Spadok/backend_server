@@ -12,7 +12,7 @@ public class CategoryRequestDto {
     private String name;
 
     @NotBlank(message = "Image URL is mandatory")
-    private String imageUrl;
+    private MultipartFile image;
 
     @NotBlank(message = "Description is mandatory")
     private String description;

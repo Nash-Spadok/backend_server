@@ -3,7 +3,6 @@ package com.nash_spadok.backend_server.service.impl;
 import com.nash_spadok.backend_server.dto.category.CategoryRequestDto;
 import com.nash_spadok.backend_server.dto.category.CategoryResponseDto;
 import com.nash_spadok.backend_server.exception.EntityNotFoundException;
-import com.nash_spadok.backend_server.exception.FileIsEmptyException;
 import com.nash_spadok.backend_server.mapper.CategoryMapper;
 import com.nash_spadok.backend_server.model.category.Category;
 import com.nash_spadok.backend_server.model.file.CategoryFile;
@@ -14,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -28,7 +28,7 @@ public class CategoryServiceImpl implements CategoryService {
     @Transactional
     public CategoryResponseDto createCategory(CategoryRequestDto categoryRequestDto) {
         Category category = categoryMapper.toCategory(categoryRequestDto);
-        CategoryFile categoryFile = setCategoryFile(categoryRequestDto.getImageUrl(), category);
+        CategoryFile categoryFile = setCategoryFile(categoryRequestDto.getImage(), category);
         category.setCategoryFile(categoryFile);
         return categoryMapper.toDto(categoryRepository.save(category));
     }
@@ -70,7 +70,7 @@ public class CategoryServiceImpl implements CategoryService {
         );
     }
 
-    private CategoryFile setCategoryFile(String imageUrl, Category category) {
-        return categoryFileService.create(imageUrl, category);
+    private CategoryFile setCategoryFile(MultipartFile image, Category category) {
+        return categoryFileService.create(image, category);
     }
 }

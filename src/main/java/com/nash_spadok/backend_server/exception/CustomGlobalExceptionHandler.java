@@ -60,6 +60,11 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
         return createBodyMessage(ex, HttpStatus.IM_USED);
     }
 
+    @ExceptionHandler(FileUploadException.class)
+    public ResponseEntity<Object> handleEntityNotFoundException(FileUploadException ex) {
+        return createBodyMessage(ex, HttpStatus.SERVICE_UNAVAILABLE);
+    }
+
     private ResponseEntity<Object> createBodyMessage(Exception ex, HttpStatus status) {
         Map<String, Object> body = new LinkedHashMap<>();
         body.put("timestamp", LocalDateTime.now());
