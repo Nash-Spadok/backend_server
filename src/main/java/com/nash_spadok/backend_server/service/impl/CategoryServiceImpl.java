@@ -29,7 +29,7 @@ public class CategoryServiceImpl implements CategoryService {
     @Transactional
     public CategoryResponseDto createCategory(CategoryRequestDto categoryRequestDto) {
         Category category = categoryMapper.toCategory(categoryRequestDto);
-        CategoryFile categoryFile = setCategoryFile(categoryRequestDto.getImage(), category);
+        CategoryFile categoryFile = getCategoryFile(categoryRequestDto.getImage(), category);
         category.setCategoryFile(categoryFile);
         return categoryMapper.toDto(categoryRepository.save(category));
     }
@@ -42,7 +42,7 @@ public class CategoryServiceImpl implements CategoryService {
         categoryMapper.updateCategoryFromDto(categoryRequestDto, category);
 
         if (categoryRequestDto.getImage() != null) {
-            CategoryFile categoryFile = setCategoryFile(categoryRequestDto.getImage(), category);
+            CategoryFile categoryFile = getCategoryFile(categoryRequestDto.getImage(), category);
             category.setCategoryFile(categoryFile);
         }
         return categoryMapper.toDto(categoryRepository.save(category));
@@ -81,7 +81,7 @@ public class CategoryServiceImpl implements CategoryService {
         categoryFileService.delete(imageUrl);
     }
 
-    private CategoryFile setCategoryFile(MultipartFile image, Category category) {
+    private CategoryFile getCategoryFile(MultipartFile image, Category category) {
         return categoryFileService.create(image, category);
     }
 }

@@ -25,7 +25,11 @@ public class SubCategory {
     @JoinColumn(name = "category_id", nullable = false)
     private Category category;
 
-    @OneToOne(mappedBy = "subCategory", fetch = FetchType.LAZY)
+    @OneToOne(
+            mappedBy = "subCategory",
+            fetch = FetchType.LAZY,
+            cascade = {CascadeType.PERSIST, CascadeType.REMOVE}
+    )
     private SubCategoryFile subCategoryFile;
 
     @OneToMany(mappedBy = "subCategory", fetch = FetchType.LAZY)
