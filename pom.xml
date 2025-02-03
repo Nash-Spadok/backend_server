@@ -8,8 +8,8 @@
 		<version>3.4.1</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.nash_spadok</groupId>
-	<artifactId>backend_server</artifactId>
+	<groupId>com.nashspadok</groupId>
+	<artifactId>backendserver</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>backend_server</name>
 	<url/>
@@ -161,9 +161,11 @@
 					<consoleOutput>true</consoleOutput>
 					<failsOnError>true</failsOnError>
 					<linkXRef>false</linkXRef>
-					<excludes>src/main/resources/application.properties
-					</excludes>
-					<includes>src</includes>
+					<sourceDirectories>
+						<sourceDirectory>${project.build.sourceDirectory}</sourceDirectory>
+					</sourceDirectories>
+					<suppressionsLocation>checkstyle-suppressions.xml</suppressionsLocation>
+					<suppressionsFileExpression>checkstyle.suppressions.file</suppressionsFileExpression>
 				</configuration>
 			</plugin>
 			<plugin>
