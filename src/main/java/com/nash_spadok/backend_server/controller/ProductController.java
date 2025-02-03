@@ -57,7 +57,7 @@ public class ProductController {
     @PreAuthorize("hasRole('ADMIN')")
     @PatchMapping("/{id}")
     @Operation(summary = "Update a product", description = "Update a product")
-    public ResponseEntity<BookProductRespondDto> updateProduct(
+    public ResponseEntity<?> updateProduct(
             @RequestPart("data") String data,
             @RequestPart("files") List<@ValidImageFile MultipartFile> files,
             @PathVariable Long id
