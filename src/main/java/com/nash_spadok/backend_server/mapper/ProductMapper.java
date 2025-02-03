@@ -22,8 +22,8 @@ public interface ProductMapper {
     @Mapping(target = "images", ignore = true)
     VyshyvankaProductRespondDto toVyshyvankaDto(Product product);
 
-//    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-//    void updateProductFromDto(BookProductRequestDto productRequestDto, @MappingTarget Product product);
+    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+    void updateProductFromDto(BookProductRequestDto productRequestDto, @MappingTarget Product product);
 
 //    @AfterMapping
 //    default void setProductSubCategoryIds(Product product, @MappingTarget BookProductRespondDto productRespondDto) {

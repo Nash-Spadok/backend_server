@@ -5,6 +5,7 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -23,12 +24,11 @@ public class BookProductRequestDto {
     @NotBlank(message = "Color is mandatory")
     private String description;
 
-    @NotBlank(message = "Image URL is mandatory")
-    private List<Long> images;
-
     private String genre;
 
     private String size;
+
+    private List<MultipartFile> images;
 
     private boolean isABook;
 }

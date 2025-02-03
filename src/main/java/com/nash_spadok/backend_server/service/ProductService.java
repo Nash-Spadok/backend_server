@@ -1,16 +1,17 @@
 package com.nash_spadok.backend_server.service;
 
 import com.nash_spadok.backend_server.dto.product.BookProductRequestDto;
+import com.nash_spadok.backend_server.dto.product.BookProductRespondDto;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
 public interface ProductService {
     ResponseEntity<?> createProduct(BookProductRequestDto productRequestDto);
-//
-//    BookProductRespondDto updateProduct(BookProductRequestDto productRequestDto, Long id);
-//
-//    void deleteProduct(Long id);
+
+    ResponseEntity<?> updateProduct(BookProductRequestDto productRequestDto, Long id);
+
+    void deleteProduct(Long id);
 
     ResponseEntity<?> getProduct(Long id);
 
