@@ -12,7 +12,7 @@ databaseChangeLog:
                   constraints:
                     primaryKey: true
                     foreignKeyName: fk_book_product_details_product
-                    foreignKeyTableName: product
+                    foreignKeyTableName: products
                     nullable: false
               - column:
                   name: genre
@@ -25,4 +25,4 @@ databaseChangeLog:
             baseTableName: book_product_details
             constraintName: fk_book_product_details_product
             referencedColumnNames: id
-            referencedTableName: product
+            referencedTableName: products
