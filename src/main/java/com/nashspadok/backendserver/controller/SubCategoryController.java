@@ -56,7 +56,7 @@ public class SubCategoryController {
 
     @GetMapping("/category/{categoryId}")
     @Operation(summary = "Get subcategory by category id")
-    public List<SubCategoryResponseDto> getSubCategoryByCategoryId(@PathVariable Long categoryId) {
+    public List<SubCategoryResponseDto> getSubCategoriesCategoryId(@PathVariable Long categoryId) {
         return subCategoryService.getSubCategoryByCategoryId(categoryId);
     }
 

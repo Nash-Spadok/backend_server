@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nashspadok.backendserver.dto.category.CategoryRequestDto;
 import com.nashspadok.backendserver.dto.category.CategoryResponseDto;
 import com.nashspadok.backendserver.dto.category.CategoryUpdateRequestDto;
+import com.nashspadok.backendserver.dto.category.CategoryWithoutSubcategoriesResponseDto;
 import com.nashspadok.backendserver.service.CategoryService;
 import com.nashspadok.backendserver.validation.ValidImageFile;
 import io.swagger.v3.oas.annotations.Operation;
@@ -40,7 +41,7 @@ public class CategoryController {
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @Operation(summary = "", description = "")
-    public ResponseEntity<CategoryResponseDto> createCategory(
+    public ResponseEntity<CategoryWithoutSubcategoriesResponseDto> createCategory(
             @RequestPart("data") String data,
             @RequestPart("file") @ValidImageFile MultipartFile file
     ) {
@@ -97,5 +98,13 @@ public class CategoryController {
     public ResponseEntity<List<CategoryResponseDto>> getAllCategories(
             @ParameterObject @PageableDefault Pageable pageable) {
         return ResponseEntity.ok(categoryService.getAllCategories(pageable));
+    }
+
+    @GetMapping("/without_subcategories")
+    @Operation(summary = "Get all categories")
+    public ResponseEntity<List<CategoryWithoutSubcategoriesResponseDto>>
+                    getAllCategoriesWithoutSubcategories(
+            @ParameterObject @PageableDefault Pageable pageable) {
+        return ResponseEntity.ok(categoryService.getAllCategoriesWithoutSubcategories(pageable));
     }
 }

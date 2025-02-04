@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/auth")
+@RequestMapping("api/v1/auth")
 @Validated
 @Tag(name = "Authentication",
         description = "Operations related to user authentication such as registration, "

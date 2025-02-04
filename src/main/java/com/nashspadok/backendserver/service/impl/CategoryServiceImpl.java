@@ -3,6 +3,7 @@ package com.nashspadok.backendserver.service.impl;
 import com.nashspadok.backendserver.dto.category.CategoryRequestDto;
 import com.nashspadok.backendserver.dto.category.CategoryResponseDto;
 import com.nashspadok.backendserver.dto.category.CategoryUpdateRequestDto;
+import com.nashspadok.backendserver.dto.category.CategoryWithoutSubcategoriesResponseDto;
 import com.nashspadok.backendserver.exception.EntityNotFoundException;
 import com.nashspadok.backendserver.mapper.CategoryMapper;
 import com.nashspadok.backendserver.model.category.Category;
@@ -26,11 +27,13 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     @Transactional
-    public CategoryResponseDto createCategory(CategoryRequestDto categoryRequestDto) {
+    public CategoryWithoutSubcategoriesResponseDto createCategory(
+            CategoryRequestDto categoryRequestDto
+    ) {
         Category category = categoryMapper.toCategory(categoryRequestDto);
         CategoryFile categoryFile = getCategoryFile(categoryRequestDto.getImage(), category);
         category.setCategoryFile(categoryFile);
-        return categoryMapper.toDto(categoryRepository.save(category));
+        return categoryMapper.toDtoWithoutSubcategories(categoryRepository.save(category));
     }
 
     @Override
@@ -67,6 +70,17 @@ public class CategoryServiceImpl implements CategoryService {
                 .findAll(pageable)
                 .stream()
                 .map(categoryMapper::toDto)
+                .toList();
+    }
+
+    @Override
+    public List<CategoryWithoutSubcategoriesResponseDto> getAllCategoriesWithoutSubcategories(
+            Pageable pageable
+    ) {
+        return categoryRepository
+                .findAll(pageable)
+                .stream()
+                .map(categoryMapper::toDtoWithoutSubcategories)
                 .toList();
     }
 

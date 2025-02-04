@@ -1,6 +1,6 @@
 databaseChangeLog:
   - changeSet:
-      id: 11-insert-data-to-user-table
+      id: 12-insert-data-to-user-table
       author: Vadym P
       changes:
         - insert:
