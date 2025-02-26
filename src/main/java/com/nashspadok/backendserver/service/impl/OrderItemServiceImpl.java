@@ -1,4 +1,4 @@
-package com.nashspadok.backendserver.service;
+package com.nashspadok.backendserver.service.impl;
 
 import com.nashspadok.backendserver.dto.OrderItemRequestDto;
 import com.nashspadok.backendserver.exception.ProductNotAvailableException;
@@ -7,6 +7,7 @@ import com.nashspadok.backendserver.model.order.Order;
 import com.nashspadok.backendserver.model.order.OrderItem;
 import com.nashspadok.backendserver.model.product.Product;
 import com.nashspadok.backendserver.repository.product.ProductRepository;
+import com.nashspadok.backendserver.service.OrderItemService;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
