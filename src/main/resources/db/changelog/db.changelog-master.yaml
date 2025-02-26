@@ -1,11 +1,25 @@
 databaseChangeLog:
   - include:
-      file: db/changelog/changeset/01-create-product-table.yaml
+      file: db/changelog/changeset/01-create-category-table.yaml
   - include:
-      file: db/changelog/changeset/02-create-category-table.yaml
+      file: db/changelog/changeset/02-create-subcategory-table.yaml
   - include:
-      file: db/changelog/changeset/03-insert-to-category-table.yaml
+      file: db/changelog/changeset/03-create-product-table.yaml
   - include:
-      file: db/changelog/changeset/04-insert-to-product-table.yaml
+      file: db/changelog/changeset/04-create-book-product-details-table.yaml
   - include:
-      file: db/changelog/changeset/05-add-column-category-table.yaml
+      file: db/changelog/changeset/05-create-vyshyvanka-product-details-table.yaml
+  - include:
+      file: db/changelog/changeset/06-create-category_file-table.yaml
+  - include:
+      file: db/changelog/changeset/07-create-product_file-table.yaml
+  - include:
+      file: db/changelog/changeset/08-create-subcategory_file-table.yaml
+  - include:
+      file: db/changelog/changeset/09-create-user-table.yaml
+  - include:
+      file: db/changelog/changeset/10-create-role-table.yaml
+  - include:
+      file: db/changelog/changeset/11-create-users-roles-table.yaml
+  - include:
+      file: db/changelog/changeset/12-insert-data-to-user-table.yaml

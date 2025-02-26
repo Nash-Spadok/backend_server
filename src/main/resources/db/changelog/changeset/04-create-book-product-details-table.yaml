@@ -1,0 +1,28 @@
+databaseChangeLog:
+  - changeSet:
+      id: 04-create-book-product-details-table
+      author: Vadym P
+      changes:
+        - createTable:
+            tableName: book_product_details
+            columns:
+              - column:
+                  name: product_id
+                  type: BIGINT
+                  constraints:
+                    primaryKey: true
+                    foreignKeyName: fk_book_product_details_product
+                    foreignKeyTableName: products
+                    nullable: false
+              - column:
+                  name: genre
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+
+        - addForeignKeyConstraint:
+            baseColumnNames: product_id
+            baseTableName: book_product_details
+            constraintName: fk_book_product_details_product
+            referencedColumnNames: id
+            referencedTableName: products
