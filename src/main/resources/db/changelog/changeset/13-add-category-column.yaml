@@ -1,0 +1,14 @@
+databaseChangeLog:
+  - changeSet:
+      id: 13-add-category-column.yaml
+      author: Vadym P
+      changes:
+        - addColumn:
+            tableName: categories
+            columns:
+              - column:
+                  name: key
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: true
+                    unique: true
