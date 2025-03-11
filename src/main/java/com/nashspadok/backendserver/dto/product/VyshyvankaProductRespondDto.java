@@ -14,6 +14,6 @@ public class VyshyvankaProductRespondDto {
     private String description;
     private List<Long> images;
     private String size;
-    private List<String> sizeAvailable;
+    private List<String> sizesAvailable;
     private boolean isAvailable;
 }
