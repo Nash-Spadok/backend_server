@@ -2,7 +2,9 @@ package com.nashspadok.backendserver.service.impl;
 
 import com.nashspadok.backendserver.dto.SubCategoryRequestDto;
 import com.nashspadok.backendserver.dto.SubCategoryResponseDto;
+import com.nashspadok.backendserver.dto.category.CategoryWithoutSubcategoriesResponseDto;
 import com.nashspadok.backendserver.exception.EntityNotFoundException;
+import com.nashspadok.backendserver.mapper.CategoryMapper;
 import com.nashspadok.backendserver.mapper.SubCategoryMapper;
 import com.nashspadok.backendserver.model.category.Category;
 import com.nashspadok.backendserver.model.category.SubCategory;
@@ -24,6 +26,7 @@ public class SubCategoryServiceImpl implements SubCategoryService {
     private final SubCategoryMapper subCategoryMapper;
     private final CategoryRepository categoryRepository;
     private final SubCategoryFileService subCategoryFileService;
+    private final CategoryMapper categoryMapper;
 
     @Override
     public SubCategoryResponseDto createSubCategory(SubCategoryRequestDto subCategoryRequestDto) {
@@ -53,6 +56,17 @@ public class SubCategoryServiceImpl implements SubCategoryService {
                 .stream()
                 .map(subCategoryMapper::toDto)
                 .toList();
+    }
+
+
+    @Override
+    public CategoryWithoutSubcategoriesResponseDto getBySubcategory(Long id) {
+        SubCategory subCategory = subCategoryRepository.findById(id).orElseThrow(
+                () -> new EntityNotFoundException(String
+                        .format("SubCategory with id %d not exist", id))
+        );
+        return categoryMapper.toDtoWithoutSubcategories(subCategory.getCategory());
+
     }
 
     private Category findCategoryById(Long id) {

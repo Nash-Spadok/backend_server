@@ -7,23 +7,19 @@ import com.nashspadok.backendserver.dto.category.CategoryWithoutSubcategoriesRes
 import com.nashspadok.backendserver.exception.EntityNotFoundException;
 import com.nashspadok.backendserver.mapper.CategoryMapper;
 import com.nashspadok.backendserver.model.category.Category;
-import com.nashspadok.backendserver.model.file.CategoryFile;
 import com.nashspadok.backendserver.repository.CategoryRepository;
-import com.nashspadok.backendserver.service.CategoryFileService;
 import com.nashspadok.backendserver.service.CategoryService;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.multipart.MultipartFile;
 
 @Service
 @RequiredArgsConstructor
 public class CategoryServiceImpl implements CategoryService {
     private final CategoryRepository categoryRepository;
     private final CategoryMapper categoryMapper;
-    private final CategoryFileService categoryFileService;
 
     @Override
     @Transactional
@@ -31,8 +27,6 @@ public class CategoryServiceImpl implements CategoryService {
             CategoryRequestDto categoryRequestDto
     ) {
         Category category = categoryMapper.toCategory(categoryRequestDto);
-        CategoryFile categoryFile = getCategoryFile(categoryRequestDto.getImage(), category);
-        category.setCategoryFile(categoryFile);
         return categoryMapper.toDtoWithoutSubcategories(categoryRepository.save(category));
     }
 
@@ -43,10 +37,6 @@ public class CategoryServiceImpl implements CategoryService {
         Category category = findCategoryById(id);
         categoryMapper.updateCategoryFromDto(categoryRequestDto, category);
 
-        if (categoryRequestDto.getImage() != null) {
-            CategoryFile categoryFile = getCategoryFile(categoryRequestDto.getImage(), category);
-            category.setCategoryFile(categoryFile);
-        }
         return categoryMapper.toDto(categoryRepository.save(category));
     }
 
@@ -54,7 +44,6 @@ public class CategoryServiceImpl implements CategoryService {
     @Transactional
     public void deleteCategory(Long id) {
         Category category = findCategoryById(id);
-        deleteImageFromS3(category.getCategoryFile().getUrl());
         categoryRepository.delete(category);
     }
 
@@ -84,18 +73,11 @@ public class CategoryServiceImpl implements CategoryService {
                 .toList();
     }
 
+
     private Category findCategoryById(Long id) {
         return categoryRepository.findById(id).orElseThrow(
                 () -> new EntityNotFoundException(String
                         .format("Category with id %d not exist", id))
         );
-    }
-
-    private void deleteImageFromS3(String imageUrl) {
-        categoryFileService.delete(imageUrl);
-    }
-
-    private CategoryFile getCategoryFile(MultipartFile image, Category category) {
-        return categoryFileService.create(image, category);
     }
 }

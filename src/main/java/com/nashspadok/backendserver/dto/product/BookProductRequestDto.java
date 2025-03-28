@@ -30,4 +30,6 @@ public class BookProductRequestDto {
     private List<MultipartFile> images;
 
     private boolean isABook;
+
+    private boolean isAvailable;
 }

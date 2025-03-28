@@ -11,9 +11,9 @@ public class CategoryRequestDto {
     @NotBlank(message = "Name is mandatory")
     private String name;
 
+    @NotBlank(message = "Key is mandatory")
+    private String key;
+
     @NotBlank(message = "Image is mandatory")
     private MultipartFile image;
-
-    @NotBlank(message = "Description is mandatory")
-    private String description;
 }
