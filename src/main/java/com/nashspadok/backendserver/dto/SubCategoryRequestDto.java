@@ -12,6 +12,9 @@ public class SubCategoryRequestDto {
     @NotBlank(message = "Name is required")
     private String name;
 
+    @NotBlank(message = "Key is required")
+    private String key;
+
     @NotNull(message = "Category is required")
     private Long categoryId;
 

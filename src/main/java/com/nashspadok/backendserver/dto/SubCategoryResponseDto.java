@@ -8,6 +8,7 @@ import lombok.Setter;
 public class SubCategoryResponseDto {
     private Long id;
     private String name;
+    private String key;
     private Long categoryId;
     private String imageUrl;
 }

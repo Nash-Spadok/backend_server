@@ -8,6 +8,5 @@ import lombok.Setter;
 public class CategoryWithoutSubcategoriesResponseDto {
     private Long id;
     private String name;
-    private Long imageUrlId;
-    private String description;
+    private String key;
 }
